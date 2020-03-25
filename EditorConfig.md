@@ -6,9 +6,14 @@ EditorConfig包含一个用于定义代码格式的文件和一批编辑器插�
 vscode安装简单，直接在插件市场搜索editorconfig for vs code 安装就可以
 ## 使用
 - 在当前项目根目录下添加 .editorconfig
+
 - 安装editorConfig插件
+
 - 全局安装或局部安装editorconfig依赖包(npm install -g editorconfig | npm install -D editorconfig)
+
 - 打开需要格式的文件并受到格式代码
+
+可以通过资源管理器侧栏的上下文菜单右键选择`Generate .editorconfig，然后这个目录下面就会创建出一个.editorconfig文件了，当然如果团队里有已经配置好的这个文件，直接复制过来就行了。`
  ## 常用的属性配置
  1、root<boolean>：是否是顶级配置文件，设置为true的时候才会停止搜索.editorconfig文件
  2、charset<"latin"|"utf-8"|"utf-8-bom">：文件编码格式
