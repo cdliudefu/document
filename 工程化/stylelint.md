@@ -288,6 +288,10 @@ Unexpected unknown at-rule "@if" (at-rule-no-unknown)
 Unexpected unknown at-rule "@return" (at-rule-no-unknown)
 ```
 
+ 
+
+ 
+
  最开始只安装了官方推荐的定义规则"stylelint-config-standard",我想是不是我缺少插件的问题，所以我就多安装了一 个"stylelint-scss"插件，错误已然存在，最后通过"stylelint-scss"的github找到了答案，就是需要添加排除规则。[具体内容请点击访问](https://github.com/kristerkari/stylelint-scss/issues/86)
 
 添加排除规则之后就好了。
@@ -308,3 +312,160 @@ Unexpected unknown at-rule "@return" (at-rule-no-unknown)
   }
 }
 ```
+
+#### 其他
+
+1. 在样式之前标注“/* stylelint-disable */”，可忽略配置的规则；标注“/* stylelint-enable */“，开启配置的规则
+2. “/* stylelint-enable */“必须在“/* stylelint-disable */”之后使用
+3. 忽略指定的内容：
+    （1）.stylelintrc
+    {
+    "rules": {
+    "unit-no-unknown": [true, ignoreUnits:["xxx"]]
+    }
+    }
+    （2）package.json && stylelint.config.js
+    {
+    "rules": {
+    "at-rule-no-unknown": [true, {"ignoreAtRules": ["function", "if",  "return", "include", "extend", "mixin", "else", "while", "for",  "each"]}]
+    }
+    }
+
+配置文件
+
+ 1.
+ {
+ "rules": {
+ "color-hex-case": "lower",
+ "color-no-invalid-hex": true,
+ "at-rule-name-space-after": "always",
+ "at-rule-semicolon-newline-after": "always",
+ "at-rule-no-unknown": [true, ignoreAtRules: ["function", "if", "return",  "include", "extend", "mixin", "else", "while", "for", "each"]],
+ "function-comma-space-after": "always",
+ "function-linear-gradient-no-nonstandard-direction": true,
+ "function-url-quotes": "always",
+ "function-whitespace-after": "always",
+ "number-leading-zero": "never",
+ "number-no-trailing-zeros": true,
+ "string-no-newline": true,
+ "string-quotes": "double",
+ "unit-case": "lower",
+ "unit-no-unknown": true,
+ "value-keyword-case": "lower",
+ "value-list-comma-newline-after": "always-multi-line",
+ "value-list-comma-space-after": "always",
+ "shorthand-property-no-redundant-values": true,
+ "declaration-bang-space-after": "never",
+ "declaration-bang-space-before": "always",
+ "declaration-colon-space-after": "always",
+ "declaration-colon-space-before": "never",
+ "declaration-block-no-ignored-properties": true,
+ "declaration-block-no-shorthand-property-overrides": true,
+ "declaration-block-semicolon-newline-after": "always-multi-line",
+ "declaration-block-semicolon-newline-before": "never-multi-line",
+ "declaration-block-semicolon-space-after": "always-single-line",
+ "declaration-block-semicolon-space-before": "never",
+ "declaration-block-trailing-semicolon": "always",
+ "block-no-empty": true,
+ "block-opening-brace-space-after": "always-single-line",
+ "block-opening-brace-space-before": "always",
+ "block-closing-brace-space-before": "always-single-line",
+ "selector-attribute-brackets-space-inside": "always",
+ "selector-attribute-operator-space-after": "always",
+ "selector-attribute-operator-space-before": "always",
+ "selector-combinator-space-after": "always",
+ "selector-combinator-space-before": "always",
+ "selector-max-compound-selectors": 4,
+ "selector-no-universal": true,
+ "selector-pseudo-class-case": "lower",
+ "selector-pseudo-class-no-unknown": true,
+ "selector-pseudo-element-case": "lower",
+ "selector-pseudo-element-no-unknown": true,
+ "selector-type-case": "lower",
+ "selector-max-empty-lines": 0,
+ "selector-list-comma-newline-before": "never-multi-line",
+ "selector-list-comma-space-after": "always-single-line",
+ "rule-nested-empty-line-before": "never",
+ "media-query-list-comma-newline-after": "always-multi-line",
+ "media-query-list-comma-space-after": "always-single-line",
+ "comment-whitespace-inside": "always",
+ "max-empty-lines": 1,
+ "max-nesting-depth": 4,
+ "no-descending-specificity": true,
+ "no-duplicate-selectors": true,
+ "no-empty-source": true,
+ "no-eol-whitespace": true,
+ "no-extra-semicolons": true,
+ "no-invalid-double-slash-comments": true,
+ "no-unknown-animations": true
+ }
+ }
+
+#### 配置文件说明
+
+| 属性名                                                       | 属性值             | 描述                                                       |
+| ------------------------------------------------------------ | ------------------ | ---------------------------------------------------------- |
+| [color-hex-case](http://stylelint.io/user-guide/rules/color-hex-case/) | lower              | 颜色值为小写字母                                           |
+| [color-no-invalid-hex](http://stylelint.io/user-guide/rules/color-no-invalid-hex) | true               | 颜色值不能为无效值                                         |
+| [at-rule-name-space-after](http://stylelint.io/user-guide/rules/at-rule-name-space-after) | always             | @xx 后需空格                                               |
+| [at-rule-semicolon-new-new-line](http://stylelint.io/user-guide/rules/at-rule-semicolon-new-new-line) | alway              | @xx 分号后要换行                                           |
+| [function-calc-no-unspaced-operator](http://stylelint.io/user-guide/rules/function-calc-no-unspaced-operator) | true               | 方法中的计算符号左右需空格                                 |
+| [function-comma-space-after](http://stylelint.io/user-guide/rules/function-comma-space-after) | always             | 方法中逗号后需空格                                         |
+| [function-linear-gradient-no-nonstandard-direction](http://stylelint.io/user-guide/rules/function-linear-gradient-no-nonstandard-direction) | true               | linear-gradient()内参数严格按照css规范                     |
+| [function-max-line-lines](http://stylelint.io/user-guide/rules/function-max-line-lines) | 0                  | 方法中参数允许0行空行                                      |
+| [function-parentheses-newline-inside](http://stylelint.io/user-guide/rules/function-parentheses-newline-inside) | never-multi-line   | 方法中参数允许逗号后换行                                   |
+| [function-url-quotes](http://stylelint.io/user-guide/rules/function-url-quotes) | always             | 地址一定要写引号                                           |
+| [function-whitespace-after](http://stylelint.io/user-guide/rules/function-whitespace-after) | always             | 方法之间一定要空格                                         |
+| [number-leading-zero](http://stylelint.io/user-guide/rules/number-leading-zero) | never              | 数字不以0开头。错误：0.5；正确：.5                         |
+| [number-no-trailing-zeros](http://stylelint.io/user-guide/rules/number-no-trailing-zeros) | true               | 不能有数字末尾多余的0。错误：1.000；正确：1                |
+| [string-no-newline](http://stylelint.io/user-guide/rules/string-no-newline) | true               | 字符串之前不能有“\n"                                       |
+| [string-quotes](http://stylelint.io/user-guide/rules/string-quotes) | double             | 字符串最外层用双引号，而不是单引号                         |
+| [unit-case](http://stylelint.io/user-guide/rules/unit-case)  | lower              | 单位小写                                                   |
+| [unit-no-unknown](http://stylelint.io/user-guide/rules/unit-no-unknown) | true               | 不允许未知的单位                                           |
+| [value-keyword-case](http://stylelint.io/user-guide/rules/value-keyword-case) | lower              | 属性值小写                                                 |
+| [value-list-comma-newline-after](http://stylelint.io/user-guide/rules/value-list-comma-newline-after) | always-multi-line  | 属性值列不允许逗号前换行                                   |
+| [value-list-comma-space-after](http://stylelint.io/user-guide/rules/value-list-comma-space-after) | always             | 属性值列表逗号后需空格                                     |
+| [shorthand-properyu-no-redundat-values](http://stylelint.io/user-guide/rules/shorthand-properyu-no-redundat-values) | true               | 可简写的属性不重复写，错误：margin: 1px 1px;               |
+| [declaration-bang-space-after](http://stylelint.io/user-guide/rules/declaration-bang-space-after) | never              | !important中！后不空格                                     |
+| [declatation-bang-space-before](http://stylelint.io/user-guide/rules/declatation-bang-space-before) | always             | !important中！前空一格                                     |
+| [declatation-colon-space-after](http://stylelint.io/user-guide/rules/declatation-colon-space-after) | always             | 属性名冒号后空一格                                         |
+| [declatation-colon-space-before](http://stylelint.io/user-guide/rules/declatation-colon-space-before) | never              | 属性名冒号前不空格                                         |
+| [declatation-block-no-ignored-properties](http://stylelint.io/user-guide/rules/declatation-block-no-ignored-properties) | true               | 禁止那些由于在同一规则的另一个属性值忽略的属性值。         |
+| [declaration-block-no-shorthand-property-overrides](http://stylelint.io/user-guide/rules/declaration-block-no-shorthand-property-overrides) | true               | 错误：border-top-width: 1px; border: 2px solid blue;       |
+| [declaration-block-semicolon-newline-after](http://stylelint.io/user-guide/rules/declaration-block-semicolon-newline-after) | always-multi-line  | 一个模块要么整个模块一行显示，要么分号后分行显示           |
+| [declaration-block-semicolon-space-after](http://stylelint.io/user-guide/rules/declaration-block-semicolon-space-after) | always-single-line | 属性之间分号后空一格或换行                                 |
+| [declaration-block-semicolon-newline-before](http://stylelint.io/user-guide/rules/declaration-block-semicolon-newline-before) | never-multi-line   | 分号前不允许换行                                           |
+| [declaration-block-semicolon-space-before](http://stylelint.io/user-guide/rules/declaration-block-semicolon-space-before） | never              | 分号前不允许空格                                           |
+| [declaration-block-trailing-semicolon](http://stylelint.io/user-guide/rules/declaration-block-trailing-semicolon) | always             | 模块内最后一个属性必须有分号                               |
+| [block-no-empty](http://stylelint.io/user-guide/rules/block-no-empty) | true               | 不允许模块内为空                                           |
+| [block-opening-brace-space-after](http://stylelint.io/user-guide/rules/block-opening-brace-space-after) | always-single-line | 模块单行时“{”后空一格                                      |
+| [block-opening-brace-space-before](http://stylelint.io/user-guide/rules/block-opening-brace-space-before) | always             | “{”前空一格                                                |
+| [block-closing-brace-space-before](http://stylelint.io/user-guide/rules/block-closing-brace-space-before) | always-single-line | 模块单行时“}”前空一格                                      |
+| [selector-attribute-brackets-space-inside](http://stylelint.io/user-guide/rules/selector-attribute-brackets-space-inside) | always             | “[”后空一格，“]”前空一格                                   |
+| [selector-attribute-operator-space-after](http://stylelint.io/user-guide/rules/selector-attribute-operator-space-after) | always             | “[]”内的“=”后空一格                                        |
+| [selector-attribute-operator-space-before](http://stylelint.io/user-guide/rules/selector-attribute-operator-space-before) | always             | “[]”内的“=”前空一格                                        |
+| [selector-combinator-space-after](http://stylelint.io/user-guide/rules/selector-combinator-space-after） | always             | 选择器后空一格，例如：ul> li                               |
+| [selector-combinator-space-before](http://stylelint.io/user-guide/rules/selector-combinator-space-before) | always             | 选择器前空一格，例如：ul >li                               |
+| [selector-max-compound-selectors](http://stylelint.io/user-guide/rules/selector-max-compound-selectors) | 4                  | 最多4层选择器                                              |
+| [selector-no-universal](http://stylelint.io/user-guide/rules/selector-no-universal) | true               | 不允许通用选择器*                                          |
+| [selector-pseudo-class-case](http://stylelint.io/user-guide/rules/selector-pseudo-class-case) | lower              | 伪类选择器小写（：hover之类）                              |
+| [selector-pseudo-class-no-unknown](http://stylelint.io/user-guide/rules/selector-pseudo-class-no-unknown) | true               | 不允许css规范外的伪类选择器（：hover之类）                 |
+| [selector-pseudo-element-case](http://stylelint.io/user-guide/rules/selector-pseudo-element-case) | lower              | 伪类选择器小写（：: before之类）                           |
+| [selector-pseudo-element-no-unknown](http://stylelint.io/user-guide/rules/selector-pseudo-element-no-unknown) | true               | 不允许css规范外的伪类选择器（：: before之类）              |
+| [selector-type-case](http://stylelint.io/user-guide/rules/selector-type-case | lower              | 标签选择器小写                                             |
+| [selector-max-empty-lines](http://stylelint.io/user-guide/rules/selector-max-empty-lines) | 0                  | 选择器共用一个模块，选择器之间允许0行空白                  |
+| [selector-list-comma-newline-before](http://stylelint.io/user-guide/rules/selector-list-comma-newline-before) | never-multi-line   | 选择器共用一个模块，选择器之间要么一行，要么逗号后换行     |
+| [selector-list-comma-space-after](http://stylelint.io/user-guide/rules/selector-list-comma-space-after) | always-single-line | 选择器共用一个模块，选择器一行时，逗号后空一格             |
+| [rule-nested-empty-line-before](http://stylelint.io/user-guide/rules/rule-nested-empty-line-before) | never              | 嵌套规则前不空行                                           |
+| [media-query-list-comma-newline-before](http://stylelint.io/user-guide/rules/media-query-list-comma-newline-before) | always-single-line | 媒体查询列表中不允许逗号之前换行                           |
+| [media-query-list-comma-space-after](http://stylelint.io/user-guide/rules/media-query-list-comma-space-after) | always-single-line | 媒体查询列表中单行逗号之后空一格                           |
+| [comment-whitespace-inside](http://stylelint.io/user-guide/rules/comment-whitespace-inside) | always             | 注释符之间空格。错误：/*\* haha \*/；正确：/\* haha \*/    |
+| [max-empty-lines](http://stylelint.io/user-guide/rules/max-empty-lines) | 1                  | 内容之间最多允许1行空白行                                  |
+| [max-nesting-depth](http://stylelint.io/user-guide/rules/max-nesting-depth) | 4                  | sass中允许嵌套的深度为4                                    |
+| [no-descending-specificity](http://stylelint.io/user-guide/rules/no-descending-specificity) | true               | 选择的同一元素，不允许权重较轻的选择器出现在权重较重的之后 |
+| [no-duplicate-selectors](http://stylelint.io/user-guide/rules/no-duplicate-selectors) | true               | 一个样式表不允许相同的选择器出现                           |
+| [no-empty-source](http://stylelint.io/user-guide/rules/no-empty-source) | true               | 样式表不允许为空                                           |
+| [no-eol-whitespace](http://stylelint.io/user-guide/rules/no-eol-whitespace) | true               | 样式表末尾不允许空行                                       |
+| [no-extra-semicolons](http://stylelint.io/user-guide/rules/no-extra-semicolons) | true               | 不允许多余的分号                                           |
+| [no-invalid-double-slash-comments](http://stylelint.io/user-guide/rules/no-invalid-double-slash-comments) | true               | 不允许//注释                                               |
+| [no-unknown-animations](http://stylelint.io/user-guide/rules/no-unknown-animations) | true>              | animation的name不能是keyframes没有定义的                   |
