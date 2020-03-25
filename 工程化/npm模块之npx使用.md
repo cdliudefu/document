@@ -224,4 +224,3 @@ npx github:piuccio/cowsay hello
 
 参考：
  [npx 使用教程](http://www.ruanyifeng.com/blog/2019/02/npx.html)
-
