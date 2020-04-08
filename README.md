@@ -9,3 +9,6 @@ https://github.com/pingan8787?tab=repositories
 
 - https://github.com/tugenhua0707/webpack-all-demo
 
+- page-skeleton-webpack-plugin
+
+- prerender-spa-plugin
